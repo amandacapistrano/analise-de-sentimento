@@ -24,8 +24,11 @@
     @if(session('analysis'))
         <div class="alert alert-success mt-4">
             <h5>Resultado da Análise:</h5>
+            <p><strong>Texto analisado:</strong> {{ session('text') }}</p>
             <p><strong>Sentimento: </strong>{{ session('analysis')['label'] }}</p>
+            <p><strong>Mensagem: </strong>{{ session('analysis')['message'] }}</p> <!-- Exibe a mensagem do sentimento -->
             <p><strong>Pontuação: </strong>{{ session('analysis')['score'] }}</p>
+
         </div>
     @endif
 
