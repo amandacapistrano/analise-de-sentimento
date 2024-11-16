@@ -37,31 +37,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
-
-                    <!-- Se o usuário não estiver autenticado, exibe Login e Cadastro -->
-                    @guest
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('history') }}">Histórico</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">Cadastro</a>
                         </li>
-                    @else
-                        <!-- Se o usuário estiver autenticado, exibe o nome e Logout -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Bem-vindo, {{ Auth::user()->name }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                        </li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    @endguest
+                    @endauth
                 </ul>
             </div>
         </div>
     </nav>
+
 
     <div class="container">
         @yield('content')

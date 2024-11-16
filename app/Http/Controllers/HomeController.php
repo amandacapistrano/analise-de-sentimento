@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\SentimentAnalysisService;
+use App\Models\SentimentAnalysis; 
 
 class HomeController extends Controller
 {
@@ -69,6 +70,16 @@ class HomeController extends Controller
         // Salva a análise na sessão
         session([$sessionKey => $currentCount + 1]);
     
+        // Salva o histórico de análise no banco de dados (para usuários logados)
+        if (auth()->check()) {
+            SentimentAnalysis::create([
+                'user_id' => auth()->id(),
+                'text' => $request->input('text'),
+                'label' => $bestLabel,
+                'score' => $highestScore,
+            ]);
+        }
+    
         // Atualiza o número de análises restantes (se o usuário não estiver logado)
         if (!auth()->check()) {
             $remainingAnalyses = session('remaining_analyses', 20) - 1;
@@ -79,4 +90,12 @@ class HomeController extends Controller
         return redirect()->back()->with('analysis', ['label' => $bestLabel, 'score' => $highestScore]);
     }
     
+
+    public function history()
+    {
+        $analyses = SentimentAnalysis::where('user_id', auth()->id())->get(); // Busca as análises do usuário logado
+
+        return view('history', compact('analyses'));
+    }
+
 }
