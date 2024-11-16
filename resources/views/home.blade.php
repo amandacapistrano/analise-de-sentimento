@@ -5,11 +5,13 @@
 @section('content')
 <div class="text-center">
     <h1 class="mb-4">Bem-vindo à Análise de Sentimentos!</h1>
+    <p>Para experimentar basta digitar o que você sente ou pensa e nossa ferramenta, baseada em inteligência artificial, retornará uma análise precisa sobre o tom do seu texto.</p>
 
     @guest
+         <p>Nossa ferramenta permite que você envie um texto e descubra rapidamente o sentimento predominante: positivo, negativo ou neutro. Se você não estiver logado, poderá realizar até 10 análises gratuitas. Para usuários registrados, não há limite, e você também pode salvar seu histórico de análises para futuras referências.</p>
         <p class="lead">
             Realize análises de sentimento com texto em português ou outro idioma. 
-            Usuários não cadastrados podem realizar até <strong>{{ $remainingAnalyses }}</strong> análises.
+            Análises diponíveis: <strong>{{ $remainingAnalyses }}</strong>.
         </p>
     @endguest
 
@@ -31,6 +33,18 @@
 
         </div>
     @endif
+
+  <!-- Legenda de Sentimentos com borda e alinhamento à esquerda -->
+  <div class="mt-5 border p-3 text-start">
+        <h4>Legenda de Sentimentos</h4>
+        <ul class="list-unstyled">
+            <li><strong>5 estrelas</strong>: <em>Muito positivo!</em> Seu texto reflete um sentimento extremamente positivo e otimista.</li>
+            <li><strong>4 estrelas</strong>: <em>Positivo</em> O sentimento é majoritariamente positivo, com um tom agradável e encorajador.</li>
+            <li><strong>3 estrelas</strong>: <em>Neutro</em> O texto transmite um sentimento equilibrado, sem sinais claros de positividade ou negatividade.</li>
+            <li><strong>2 estrelas</strong>: <em>Negativo</em> O texto apresenta um sentimento mais negativo, podendo indicar insatisfação ou descontentamento.</li>
+            <li><strong>1 estrela</strong>: <em>Muito negativo</em> O sentimento é altamente negativo, expressando insatisfação profunda ou frustração.</li>
+        </ul>
+    </div>
 
     @if($errors->any())
         <div class="alert alert-danger mt-4">
