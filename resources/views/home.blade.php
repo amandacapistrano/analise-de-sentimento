@@ -30,7 +30,6 @@
             <p><strong>Sentimento: </strong>{{ session('analysis')['label'] }}</p>
             <p><strong>Mensagem: </strong>{{ session('analysis')['message'] }}</p> <!-- Exibe a mensagem do sentimento -->
             <p><strong>Pontuação: </strong>{{ session('analysis')['score'] }}</p>
-
         </div>
     @endif
 
@@ -54,4 +53,12 @@
         </div>
     @endif
 </div>
+
+<!-- Ajuste do espaçamento inferior -->
+<style>
+    .text-center {
+        padding-bottom: 80px; /* Espaçamento para evitar sobreposição com o footer */
+    }
+</style>
+
 @endsection
