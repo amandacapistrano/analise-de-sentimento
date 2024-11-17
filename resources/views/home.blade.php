@@ -33,6 +33,14 @@
         </div>
     @endif
 
+    @if($errors->any())
+        <div class="alert alert-danger mt-4">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
+    
   <!-- Legenda de Sentimentos com borda e alinhamento à esquerda -->
   <div class="mt-5 border p-3 text-start">
         <h4>Legenda de Sentimentos</h4>
@@ -45,13 +53,7 @@
         </ul>
     </div>
 
-    @if($errors->any())
-        <div class="alert alert-danger mt-4">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
-    @endif
+   
 </div>
 
 <!-- Ajuste do espaçamento inferior -->
